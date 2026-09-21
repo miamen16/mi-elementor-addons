@@ -13,6 +13,8 @@ final class Plugin {
 
 	private static $instance = null;
 
+	private $initialized = false;
+
 	public static function instance() {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
@@ -22,17 +24,29 @@ final class Plugin {
 	}
 
 	private function __construct() {
-		add_action( 'plugins_loaded', array( $this, 'init' ) );
+		// Elementor loads its core classes before firing `elementor/loaded`.
+		add_action( 'elementor/loaded', array( $this, 'init' ), 20 );
+
+		// Covers unusual plugin-loading situations where Elementor has already fired.
+		if ( did_action( 'elementor/loaded' ) ) {
+			$this->init();
+		}
 	}
 
 	public function init() {
+		if ( $this->initialized ) {
+			return;
+		}
+
+		$this->initialized = true;
+
 		load_plugin_textdomain(
 			'mi-elementor-addons',
 			false,
 			dirname( plugin_basename( MI_EA_FILE ) ) . '/languages'
 		);
 
-		if ( ! did_action( 'elementor/loaded' ) ) {
+		if ( ! class_exists( '\\Elementor\\Plugin' ) || ! class_exists( '\\Elementor\\Widget_Base' ) ) {
 			add_action( 'admin_notices', array( $this, 'elementor_missing_notice' ) );
 			return;
 		}
