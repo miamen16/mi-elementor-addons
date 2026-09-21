@@ -20,4 +20,4 @@ jobs:
         run: composer install --no-interaction --prefer-dist
 
       - name: Run PHPCS
-        run: vendor/bin/phpcs --standard=WordPress --extensions=php .
+        run: vendor/bin/phpcs --standard=phpcs.xml.dist .
