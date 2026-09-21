@@ -24,13 +24,8 @@ final class Plugin {
 	}
 
 	private function __construct() {
-		// Elementor loads its core classes before firing `elementor/loaded`.
-		add_action( 'elementor/loaded', array( $this, 'init' ), 20 );
-
-		// Covers unusual plugin-loading situations where Elementor has already fired.
-		if ( did_action( 'elementor/loaded' ) ) {
-			$this->init();
-		}
+		// Run after Elementor has initialized its core classes.
+		add_action( 'plugins_loaded', array( $this, 'init' ), 20 );
 	}
 
 	public function init() {
@@ -38,18 +33,18 @@ final class Plugin {
 			return;
 		}
 
-		$this->initialized = true;
-
 		load_plugin_textdomain(
 			'mi-elementor-addons',
 			false,
 			dirname( plugin_basename( MI_EA_FILE ) ) . '/languages'
 		);
 
-		if ( ! class_exists( '\\Elementor\\Plugin' ) || ! class_exists( '\\Elementor\\Widget_Base' ) ) {
+		if ( ! did_action( 'elementor/loaded' ) || ! class_exists( '\\Elementor\\Widget_Base' ) ) {
 			add_action( 'admin_notices', array( $this, 'elementor_missing_notice' ) );
 			return;
 		}
+
+		$this->initialized = true;
 
 		require_once MI_EA_PATH . 'includes/widgets/class-product-card.php';
 		require_once MI_EA_PATH . 'includes/widgets/class-product-grid.php';
