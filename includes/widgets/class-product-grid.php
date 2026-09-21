@@ -30,6 +30,10 @@ class Product_Grid extends Widget_Base {
 		return array( 'mi-elementor-addons' );
 	}
 
+	public function get_style_depends() {
+		return array( 'mi-elementor-addons', 'mi-elementor-addons-product-grid' );
+	}
+
 	public function get_keywords() {
 		return array( 'products', 'product grid', 'woocommerce', 'shop', 'mi' );
 	}
@@ -124,8 +128,6 @@ class Product_Grid extends Widget_Base {
 			echo '<div class="mi-product-card__notice">' . esc_html__( 'No products found.', 'mi-elementor-addons' ) . '</div>';
 			return;
 		}
-
-		wp_enqueue_style( 'mi-elementor-addons' );
 
 		$columns = max( 1, min( 6, absint( $settings['columns'] ) ) );
 		?>
