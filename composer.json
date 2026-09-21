@@ -1,0 +1,13 @@
+{
+  "name": "mi-plugins/mi-elementor-addons",
+  "description": "Modular Elementor widgets by MI Plugins.",
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "wp-coding-standards/wpcs": "^3.0",
+    "phpcompatibility/php-compatibility": "^9.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+  }
+}
