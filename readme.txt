@@ -1,8 +1,8 @@
 === MI Elementor Addons ===
 Contributors: mi-plugins
-Tags: elementor, elementor widgets, woocommerce, widgets
+Tags: elementor, elementor widgets, woocommerce, widgets, product grid
 Requires at least: 6.4
-Requires PHP: 7.4
+Requires PHP: 7.4+
 Requires Plugins: elementor
 Stable tag: 0.1.0
 License: GPLv2 or later
@@ -16,6 +16,9 @@ MI Elementor Addons provides lightweight, modular Elementor widgets.
 
 Current widgets:
 * Product Card
+* Product Grid
+
+Product Grid supports WooCommerce product filtering by category, tag, featured status, sale status, and stock status, plus responsive columns, spacing, product ratings, sale badges, and card styling controls.
 
 == Requirements ==
 
@@ -27,5 +30,6 @@ Current widgets:
 == Changelog ==
 
 = 0.1.0 =
-* Initial plugin foundation.
+* Added the initial plugin foundation.
 * Added Product Card widget.
+* Added Product Grid widget with WooCommerce query filters and responsive layout controls.
