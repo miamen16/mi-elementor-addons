@@ -38,6 +38,7 @@ final class Plugin {
 		}
 
 		require_once MI_EA_PATH . 'includes/widgets/class-product-card.php';
+		require_once MI_EA_PATH . 'includes/widgets/class-product-grid.php';
 
 		add_action( 'elementor/widgets/register', array( $this, 'register_widgets' ) );
 		add_action( 'elementor/elements/categories_registered', array( $this, 'register_category' ) );
@@ -56,12 +57,20 @@ final class Plugin {
 
 	public function register_widgets( $widgets_manager ) {
 		$widgets_manager->register( new Widgets\Product_Card() );
+		$widgets_manager->register( new Widgets\Product_Grid() );
 	}
 
 	public function register_assets() {
 		wp_register_style(
 			'mi-elementor-addons',
 			MI_EA_URL . 'assets/css/frontend.css',
+			array(),
+			MI_EA_VERSION
+		);
+
+		wp_register_style(
+			'mi-elementor-addons-product-grid',
+			MI_EA_URL . 'assets/css/product-grid.css',
 			array(),
 			MI_EA_VERSION
 		);
