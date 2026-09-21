@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ruleset name="MI Elementor Addons">
+	<description>PHPCS rules for MI Elementor Addons.</description>
+
+	<file>mi-elementor-addons.php</file>
+	<file>includes</file>
+
+	<exclude-pattern>vendor/</exclude-pattern>
+
+	<rule ref="WordPress">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+	</rule>
+</ruleset>
